@@ -14,7 +14,9 @@ Nesta etapa você fará a implementação do front-end da aplicação web na OCI
 ![](./images/img1.jpg)
 3. Abra uma nova aba em seu navegador e entre no link: [CeInnovationTeam/FrontFTDev (github.com)](https://github.com/CeInnovationTeam/FrontFTDev)
 4. Clique em **code** e depois copie o link do repositório
+
 ![](./images/img2.jpg)
+
 5. Volte para a pagina da cloud e no Cloud Shell digite:
 	`git clone <link-do-repositorio> `
 Após clonar a imagem finalizamos o primeiro tópico
