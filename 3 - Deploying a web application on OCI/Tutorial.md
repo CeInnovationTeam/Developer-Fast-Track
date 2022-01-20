@@ -15,10 +15,13 @@ Nesta etapa você fará a implementação do front-end da aplicação web na OCI
 3. Abra uma nova aba em seu navegador e entre no link: [CeInnovationTeam/FrontFTDev (github.com)](https://github.com/CeInnovationTeam/FrontFTDev)
 4. Clique em **code** e depois copie o link do repositório
 
-![](./images/img2.jpg)
+![](./images/img3.jpg)
 
 5. Volte para a pagina da cloud e no Cloud Shell digite:
 	`git clone <link-do-repositorio> `
+
+  ![](./images/img4.jpg)
+
 Após clonar a imagem finalizamos o primeiro tópico
 ## Adicionar as informações necessarias para utilizar o Application Performance Monitoring (APM)
 Para utilizar o APM na sua aplicação web você precisará salvar algumas informações de sua conta na cloud.
