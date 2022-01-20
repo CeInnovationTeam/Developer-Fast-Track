@@ -1,14 +1,15 @@
-## Implementação da aplicação web front-end na OCI
+# Implementação da aplicação web front-end na OCI
 Nesta etapa você fará a implementação do front-end da aplicação web na OCI como container sendo executado em um cluster Kubernetes!
 **Você aprenderá todo o passo-a-passo dessa implementação:**
- - Clonar o repositório com a pagina web utilizando o Cloud Shell
- - Adicionar as informações necessarias para utilizar o Application Performance Monitoring (APM)
- - Build na Imagem
- - Envio da Imagem para o repositório do OCIR
- - Acessar o Cluster de Kubernetes
- - Criar o Secret
- - Aplicar o manifesto do Kubernetes
-## Clonar o repositório com a pagina web utilizando o Cloud Shell
+ - Passo 1: Clonar o repositório com a pagina web utilizando o Cloud Shell
+ - Passo 2: Adicionar as informações necessarias para utilizar o Application Performance Monitoring (APM)
+ - Passo 3: Build da Imagem da aplicação web
+ - Passo 4: Envio da Imagem para o repositório do OCIR
+ - Passo 5: Acesso ao Cluster Kubernetes
+ - Passo 6: Criação de um Secret para coleta da Imagem no OCIR
+ - Passo 7: Aplicação do Manifesto Kubernetes
+ - Passo 8: Acesso à aplicação web
+## <a name="Passo1"></a> Passo 1: Clonar o repositório com a pagina web utilizando o Cloud Shell
 1. Faça login em sua conta na Cloud. [link](https://www.oracle.com/cloud/sign-in.html)
 2. Clique no botão do Cloud Shell no canto superior direito, ao lado do nome da região:
 ![](./images/img1.jpg)
