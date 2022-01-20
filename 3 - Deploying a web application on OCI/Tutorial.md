@@ -26,9 +26,23 @@ Após clonar a imagem finalizamos o primeiro tópico
 ## Adicionar as informações necessarias para utilizar o Application Performance Monitoring (APM)
 Para utilizar o APM na sua aplicação web você precisará salvar algumas informações de sua conta na cloud.
 1. Clique no menu lateral, vá até Observability & Management e depois clique em Application Performance Monitoring
+
+![](./images/img5.jpg)
+
 2. Clique no drop box ao lado de home e depois em **Administration**
+
+![](./images/img6.jpg)
+
 3. Selecione o Compartment que está suas aplicações e depois selecione o APM Domain que foi criado com o Terraform
+
+![](./images/img7.jpg)
+
 4. Copie o **Data Upload Endpoint** e o **auto_generated_public_datakey** em um bloco de notas
+
+![](./images/img8.jpg)
+
+![](./images/img9.jpg)
+
 5. Copie o conteúdo do bloco abaixo em outro bloco de notas e altere os campos:
 	-  < APM Browser> adicione um nome para sua aplicação, como "App web"
 	- < Web App Name> adicione um nome para sua aplicação, como "App web"
@@ -50,10 +64,16 @@ window.apmrum.OracleAPMPublicDataKey='<APM_Public_Datakey>';
 Para entrar na pasta do projeto que foi clonada no GitHub
 - `ls `
 Para listar os arquivos que contém na pasta
+
+![](./images/img10.jpg)
+
 - `vim index.html`
 Para editar o arquivo html e adicionar os scripts que você editou no passo anterior
-7. Pressione a tecla **"i"** para editar o arquivo, vá até o final da tag < /head > pressione **Enter** e cole os scripts editados que você copiou do seu bloco de notas
+7. Pressione a tecla **"i"** para editar o arquivo, vá até o final da tag < /body > pressione **Enter** e cole os scripts editados que você copiou do seu bloco de notas
 8. Pressione **Esc** e depois digite "**:wq!**" para salvar o arquivo
+
+![](./images/img11.jpg)
+
 Após finalizar este passo finalizamos o segundo tópico
 ## Passo: 3 Build na Imagem
 1. Clique no icone de perfil no canto superior direito, clique em Tenancy: nomeDaSuaTenacy
