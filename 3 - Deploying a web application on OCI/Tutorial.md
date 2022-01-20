@@ -221,7 +221,7 @@ Parabéns! Agora que temos tudo pronto, podemos acessar nossa aplicação web no
 ## <a name="Passo8"></a>Passo 8: Acesso à Aplicação Web no Cluster OKE
 A nossa aplicação já foi implementada! Agora iremos acessá-la pelo próprio navegador.
 
-1. No **Cloud Shell**, insira o seguinte comando:
+1. No **Cloud Shell**, insira o seguinte comando - teste label -> [Passo 7](#Passo7):
 ```python
 kubectl get services
 ```
