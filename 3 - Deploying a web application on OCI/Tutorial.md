@@ -11,9 +11,10 @@ Nesta etapa você fará a implementação do front-end da aplicação web na OCI
 ## Clonar o repositório com a pagina web utilizando o Cloud Shell
 1. Faça login em sua conta na Cloud. [link](https://www.oracle.com/cloud/sign-in.html)
 2. Clique no botão do Cloud Shell no canto superior direito, ao lado do nome da região:
-![](./images/imgq.jpg)
+![](./images/img1.jpg)
 3. Abra uma nova aba em seu navegador e entre no link: [CeInnovationTeam/FrontFTDev (github.com)](https://github.com/CeInnovationTeam/FrontFTDev)
 4. Clique em **code** e depois copie o link do repositório
+![](./images/img2.jpg)
 5. Volte para a pagina da cloud e no Cloud Shell digite:
 	`git clone <link-do-repositorio> `
 Após clonar a imagem finalizamos o primeiro tópico
