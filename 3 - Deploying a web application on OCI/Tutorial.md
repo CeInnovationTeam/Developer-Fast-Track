@@ -1,4 +1,6 @@
-# Implementação da aplicação web front-end na OCI
+# Lab #2 - Implementação da aplicação web front-end na OCI
+**Objetivo desse Lab:**
+
 Nesta etapa você fará a implementação do front-end da aplicação web na OCI como container sendo executado em um cluster Kubernetes!
 **Você aprenderá todo o passo-a-passo dessa implementação:**
  - [Passo 1: Clonar o repositório com a pagina web utilizando o Cloud Shell](#Passo1)

@@ -1,9 +1,9 @@
 
-# Utilizando terraform no OCI
+# Lab #1 - Utilizando Terraform na OCI
 
   
 
-**Objetivo desse LAB:**
+**Objetivo desse Lab:**
 
 Provisionar recursos dentro do OCI utilizando infraestrutura como código.
 
