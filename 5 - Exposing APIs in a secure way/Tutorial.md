@@ -13,8 +13,7 @@ Para alcançar isso, vamos seguir os seguintes passos:
 ```python
 https://servicodados.ibge.gov.br/api/v1/localidades/estados/
 ```
- ![](./images/img1.JPG)
- 
+
  - Selecione o compartimento criado no projeto e clique na API que está ativa, ao lado.
 
  ![](./images/img3.png)
@@ -31,7 +30,7 @@ https://servicodados.ibge.gov.br/api/v1/localidades/estados/
   - name: ibgev1 
   - path prefix: /ibge 
   - compartment: \<seu-compartment>
-  - Os demais itens manter no padrão até chegar em API logging policies, então selecione a opção _Information_.
+  - Os demais itens manter no padrão até chegar em API Logging Policies, então selecione a opção _Information_.
 
 ![](./images/img6.png)
 ![](./images/img7.png)
@@ -63,18 +62,22 @@ https://servicodados.ibge.gov.br/api/v1/localidades/estados/
 ![](./images/img10.png)
 ![](./images/img11.png)
 
-- Enquanto o seu _deployment_ é feito, acesse o **Cloud Shell**, clicando no botão "(>_)", no canto superior direito.
+- Enquanto o seu _deployment_ é feito, acesse o **Cloud Shell**, clicando no botão "**(>_)**", no canto superior direito.
 
 ![](./images/img12.png)
 
 - Em **Deployments**, copie o **endpoint**, do seu deployment (ibgev1), clicando na opção **Copy**.
+
+![](./images/img13_1.png)
+
 - De volta ao **Cloud shell**, insira o comando:
 ```python
 curl <seu-endpoint>/stock
 ```
+![](./images/img13_2.png)
+
 - Ele retornará a mensagem do Body, que inserimos anteriormente!
 
-![](./images/img13.png)
 ![](./images/img14.png)
 
 - Agora, para propriamente testar utilizando a API pública, insira o comando:
