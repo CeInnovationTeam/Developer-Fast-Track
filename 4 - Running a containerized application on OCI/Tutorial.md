@@ -392,22 +392,63 @@ Isso conclui o passo de Build do projeto, onde automatizamos a compilação do c
   A partir desse momento, qualquer novo push feito no repositorio do projeto iniciará o pipeline de build criado nesse workshop
 
   4. Retorne a configuração do pipeline de build do projeto selecionando **Build Pipelines**, **build**
+
   ![](./IMG/055-LAB4.png)
+
   5. Na aba de Build Pipeline, clique no sinal de **"+"** abaixo do stage **Entrega de Imagem de Container** e em **Add Stage**
+
   ![](./IMG/056-LAB4.png)
+
   6. Selecione o item de **Trigger Deployment**, e clique em **Next**
+
   ![](./IMG/057-LAB4.png)
+
   7. Preencha o formulário da seguinte forma:
   - Nome: Inicio de Deployment
   - Descrição: (Defina uma descrição qualquer)
   - Selecione o pipeline de deployment: deploy
   - Mantenha os demais campos sem alteração, e clique em **Add**
+
   ![](./IMG/058-LAB4.png)
 
   Parabéns!! Voce construiu com sucesso seu primeiro pipeline de DevOps dentro de Oracle Cloud!! O passo a seguir é direcionado para validação do projeto
 
  ## <a name="Passo6"></a> Passo 6: Execução e testes
+ Neste passo validaremos a execução do projeto
+  1.  Retorne ao projeto: Menu > Serviços de Desenvolvedor > DevOps > Projetos,  e selecione o projeto deste workshop
+  2.  Retorne a configuração do pipeline de build do projeto selecionando **Build Pipelines**, **build**
+  
+  ![](./IMG/055-LAB4.png)
 
+  3. No canto esquerdo superior, selecione **Start Manual Run**
+  4. Mantenha as informações do formulário padrão, e clique em **Start Manual Run**
+  5. Aguarde a execução do fluxo
+  6. Acesse novamente o CloudShell e execute o comando
 
+  ```shell
+  kubectl get svc
+  ```
 
+  7. Copie a informação de EXTERNAL-IP assim que disponivel
+  8. Execute substituindo a informação de EXTERNAL-IP pelo IP copiado
+   ```shell
+  curl --location --request POST '<EXTERNAL-IP>/processcart' \
+--header 'Content-Type: application/json' \
+--data-raw '[
+      {   "nome":"Oranges",
+      "preco":1.99
+      },
+      {   "nome":"Apples",
+          "preco":2.97
+      },
+      {   "nome":"Bananas",
+          "preco":2.99
+      },
+      {   "nome":"Watermelon",
+          "preco":3.99
+      }
+]'
+  ```
+
+Parabéns! Pela conclusão deste laboratório!
 
