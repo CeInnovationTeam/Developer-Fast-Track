@@ -38,6 +38,7 @@ Nesta etapa construirá uma esteira de desenvolvimento capaz de entregar uma apl
  - Durante todo este laboratório, utilizaremos este código quando for solicitada a informação de **Auth Token**
 
 
+
  7. No menu, no canto esquerdo superior acesse: Observabilidade & Gerenciamento > Application Performance > Administração
 
  
@@ -265,4 +266,49 @@ Com isso cumprimos todos os pré requisitos para o laboratório:
 
 Isso conclui o passo de Build do projeto, onde automatizamos a compilação do código java, criamos a imagem de container, e armazenamos ambas nos repositórios de artefato, e de container respectivamente
 
-## <a name="Passo4"></a> Passo 4: Criar e configurar entrega de aplicação a cluster kubernetes (CD)
+## <a name="Passo4"></a> Passo 4: Criar e configurar entrega de aplicação a cluster Kubernetes (CD)
+
+ 1. Acesse: Menu > Serviços de Desenvolvedor > Kubernetes Clusters
+ 2. Selecione o cluster listado
+ 3. Clique em **Access Cluster**
+ 4. Execute os passos 1 e 2 do guia
+ 5. Teste sua conexão com o cluster executando:
+
+  ```shell
+  kubectl get nodes
+ ```
+
+ 6. Execute os comandos abaixo:
+
+ ```shell
+  cd ftRepo/scripts/
+  chmod +x create-secret.sh 
+  ./create-secret.sh  
+ ```
+
+ 7. Informe o seu User OCID (https://docs.oracle.com/pt-br/iaas/Content/API/Concepts/apisigningkey.htm#five)
+ 8. No campo de password, informe o **Auth Token**
+ 9. Aguarde o final do fluxo
+ 10. Retorne ao projeto: Menu > Serviços de Desenvolvedor > DevOps > Projetos,  e selecione o projeto deste workshop
+ 11. No canto esquerdo, selecione **Environments**
+ 12. Clique em **Create New Environment**
+ 13. Preencha o formulário da seguinte forma:
+  - Environment type: Oracle Kubernetes Engine
+  - Name: OKE
+  - Description: OKE
+ 14. Clique em **Next**
+ 15. Selecione o Cluster de Kubernetes, e clique em **Create Envrinoment**
+ 16. No canto esquerdo selecione **Artifacts** em seguida em **Add Artifact**
+ 17. Preencha o formulario da seguinte forma:
+ - Nome: deployment.yaml
+ - Tipo: Kubernetes manifest
+ - Artifact Source: Inline
+ - Value: Cole o conteudo do arquivo https://github.com/CeInnovationTeam/BackendFTDev/blob/main/scripts/deployment.yaml
+ *Não altere a identação (espaços) do documento, pois isso pode quebra-lo*
+ - Replace parameters used in this artifact: Yes, substitute placeholders
+ - Clique em **Add**
+ 18. No canto esquerdo, selecione **Developer Pipelines** em seguida clique em **Create Pipeline**
+ 19. Preencha o formulario da seguinte forma:
+ 
+
+
