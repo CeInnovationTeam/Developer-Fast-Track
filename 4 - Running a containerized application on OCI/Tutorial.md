@@ -204,3 +204,65 @@ Com isso cumprimos todos os pré requisitos para o laboratório:
 
  ## <a name="Passo3"></a> Passo 3: Criar e configurar entrega de artefatos (CI)
 
+ 1. Na aba de Build Pipeline, clique no sinal de **"+"** abaixo do stage **Criacao de artefatos** e em **Add Stage**
+     
+    ![](./IMG/027-LAB4.png)
+
+
+ 2. Clique em **Deliver Artifacts** e em **Próximo**
+     
+    ![](./IMG/028-LAB4.png)
+
+
+ 3. Preencha o formulário da seguinte forma:
+ - Stage name: Entrega de artefato
+ - Descrição: (Defina uma descrição qualquer)
+ - Selecione **Criar Artefato**
+   - Nome: backend_jar
+   - Tipo: General Artifact
+   - Artifact registry: Selecione o Registro de Artefato gerado pelo terraform de nome "artifact_repository"
+   - Artifact location: Set a Custom artifact location and version
+   - Artifact path: backend.jar
+   - Version: ${BUILDRUN_HASH}
+   - Replace parameters used in this artifact: Yes, substitute placeholders
+   - Clique em adicionar
+       
+    ![](./IMG/030-LAB4.png)
+
+
+- Preencha o campo restante da tabela **Build config/result artifact name** com: app
+    
+    ![](./IMG/029-LAB4.png)
+
+
+ 4. Clique em **Adicionar**
+ 5. Na aba de Build Pipeline, clique no sinal de **"+"** abaixo do stage **Entrega de artefato** e em **Add Parallel Stage**
+ 6. Clique em **Deliver Artifacts** e em **Próximo**
+     
+    ![](./IMG/028-LAB4.png)
+
+ 7. Preencha o formulário da seguinte forma:
+ - Stage name: Entrega de Image de Container
+ - Descrição: (Defina uma descrição qualquer)
+ - Selecione **Criar Artefato**
+   - Nome: backend_img
+   - Tipo: Container image repository
+   - Artifact Source: `<código-de-região>.ocir.io/'${IMG_PATH}:${BUILDRUN_HASH}`
+   
+   *para o código de referencia de sua região **composto por 3 letras**, utilize a [tabela de referencia](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm)*
+       
+    ![](./IMG/032-LAB4.png)
+
+
+ - Preencha o campo restante da tabela **Build config/result artifact name** com: docker-img
+       
+    ![](./IMG/033-LAB4.png)
+
+8. Clique em **Adicionar**
+9. No canto superior direito, clique em **Start Manual Run**
+       
+    ![](./IMG/034-LAB4.png)
+
+Isso conclui o passo de Build do projeto, onde automatizamos a compilação do código java, criamos a imagem de container, e armazenamos ambas nos repositórios de artefato, e de container respectivamente
+
+## <a name="Passo4"></a> Passo 4: Criar e configurar entrega de aplicação a cluster kubernetes (CD)
