@@ -237,10 +237,10 @@ Com isso cumprimos todos os pré requisitos para o laboratório:
 
 
  4. Clique em **Adicionar**
- 5. Na aba de Build Pipeline, clique no sinal de **"+"** abaixo do stage **Entrega de artefato** e em **Add Parallel Stage**
+ 5. Na aba de Build Pipeline, clique no sinal de **"+"** abaixo do stage **Entrega de artefato** e em **Add Stage**
  6. Clique em **Deliver Artifacts** e em **Próximo**
      
-    ![](./IMG/028-LAB4.png)
+    ![](./IMG/031-LAB4.png)
 
  7. Preencha o formulário da seguinte forma:
  - Stage name: Entrega de Image de Container
@@ -248,7 +248,7 @@ Com isso cumprimos todos os pré requisitos para o laboratório:
  - Selecione **Criar Artefato**
    - Nome: backend_img
    - Tipo: Container image repository
-   - Artifact Source: `<código-de-região>.ocir.io/'${IMG_PATH}:${BUILDRUN_HASH}`
+   - Artifact Source: `<código-de-região>.ocir.io/${IMG_PATH}`
    
    *para o código de referencia de sua região **composto por 3 letras**, utilize a [tabela de referencia](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm)*
        
@@ -269,9 +269,21 @@ Isso conclui o passo de Build do projeto, onde automatizamos a compilação do c
 ## <a name="Passo4"></a> Passo 4: Criar e configurar entrega de aplicação a cluster Kubernetes (CD)
 
  1. Acesse: Menu > Serviços de Desenvolvedor > Kubernetes Clusters
+        
+    ![](./IMG/035-LAB4.png)
+
  2. Selecione o cluster listado
+        
+    ![](./IMG/036-LAB4.png)
+
  3. Clique em **Access Cluster**
+        
+    ![](./IMG/037-LAB4.png)
+
  4. Execute os passos 1 e 2 do guia
+        
+    ![](./IMG/038-LAB4.png)
+
  5. Teste sua conexão com o cluster executando:
 
   ```shell
@@ -289,9 +301,18 @@ Isso conclui o passo de Build do projeto, onde automatizamos a compilação do c
  7. Informe o seu User OCID (https://docs.oracle.com/pt-br/iaas/Content/API/Concepts/apisigningkey.htm#five)
  8. No campo de password, informe o **Auth Token**
  9. Aguarde o final do fluxo
+        
+    ![](./IMG/039-LAB4.png)
+
  10. Retorne ao projeto: Menu > Serviços de Desenvolvedor > DevOps > Projetos,  e selecione o projeto deste workshop
  11. No canto esquerdo, selecione **Environments**
+         
+![](./IMG/040-LAB4.png)
+
  12. Clique em **Create New Environment**
+          
+![](./IMG/041-LAB4.png)
+
  13. Preencha o formulário da seguinte forma:
   - Environment type: Oracle Kubernetes Engine
   - Name: OKE
@@ -299,6 +320,9 @@ Isso conclui o passo de Build do projeto, onde automatizamos a compilação do c
  14. Clique em **Next**
  15. Selecione o Cluster de Kubernetes, e clique em **Create Envrinoment**
  16. No canto esquerdo selecione **Artifacts** em seguida em **Add Artifact**
+          
+![](./IMG/042-LAB4.png)
+
  17. Preencha o formulario da seguinte forma:
  - Nome: deployment.yaml
  - Tipo: Kubernetes manifest
@@ -307,23 +331,83 @@ Isso conclui o passo de Build do projeto, onde automatizamos a compilação do c
  *Não altere a identação (espaços) do documento, pois isso pode quebra-lo*
  - Replace parameters used in this artifact: Yes, substitute placeholders
  - Clique em **Add**
+          
+![](./IMG/043-LAB4.png)
+
  18. No canto esquerdo, selecione **Developer Pipelines** em seguida clique em **Create Pipeline**
+          
+![](./IMG/044-LAB4.png)
+
  19. Preencha o formulario da seguinte forma:
  - Pipeline name: deploy
  - Descrição: (Defina uma descrição qualquer)
  - Clique em **Create**
+          
+![](./IMG/048-LAB4.png)
+
  20. Na Aba de **Parameters** configure o seguinte parametro:
  - REGISTRY_REGION:  <código-de-região>.ocir.io  
  *para o código de referencia de sua região **composto por 3 letras**, utilize a [tabela de referencia](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm)*
+          
+![](./IMG/049-LAB4.png)
+
  21. Retorne a aba de **Pipeline** e clique em **Add Stage**
+          
+![](./IMG/050-LAB4.png)
+
  22. Selecione a Opção **Apply Manifest to your Kubernetes Cluster** e clique em **Next**
+          
+![](./IMG/051-LAB4.png)
+
  23. Preencha o formulário da seguinte forma:
  - Nome: **Deployment da Aplicacao**
  - Descrição: (Defina uma Descrição qualquer)
  - Environment: OKE
  - Clique em **Select Artifact** e selecione **deployment.yaml**
  - Clique em **Add**
+          
+![](./IMG/052-LAB4.png)
+
  
  Com isso finalizamos a parte de deployment, no passo a seguir vamos conectar ambos os pipelines, e definir um gatilho para que o processo automatizado se inicie
+
+ ## <a name="Passo5"></a> Passo 5: Configurar gatilho do fluxo e conectar pipelines de CI/CD
+
+  1. Retorne ao projeto: Menu > Serviços de Desenvolvedor > DevOps > Projetos,  e selecione o projeto deste workshop
+  2. No canto esquerdo selecione **Triggers** e em seguida **Create Trigger**
+  ![](./IMG/053-LAB4.png)
+  3. Preencha da seguinte forma:
+  - Nome: Inicio
+  - Descrição: (Defina uma descrição qualquer)
+  - Source connection: OCI Code Repository
+  - Select code repository: ftRepo
+  - Actions: Add Action
+    - Pipeline: build
+    - Event: Push
+    - Source branch: main
+    - Clique em **Save**
+  - Clique em **Create**
+  ![](./IMG/054-LAB4.png)
+
+  A partir desse momento, qualquer novo push feito no repositorio do projeto iniciará o pipeline de build criado nesse workshop
+
+  4. Retorne a configuração do pipeline de build do projeto selecionando **Build Pipelines**, **build**
+  ![](./IMG/055-LAB4.png)
+  5. Na aba de Build Pipeline, clique no sinal de **"+"** abaixo do stage **Entrega de Imagem de Container** e em **Add Stage**
+  ![](./IMG/056-LAB4.png)
+  6. Selecione o item de **Trigger Deployment**, e clique em **Next**
+  ![](./IMG/057-LAB4.png)
+  7. Preencha o formulário da seguinte forma:
+  - Nome: Inicio de Deployment
+  - Descrição: (Defina uma descrição qualquer)
+  - Selecione o pipeline de deployment: deploy
+  - Mantenha os demais campos sem alteração, e clique em **Add**
+  ![](./IMG/058-LAB4.png)
+
+  Parabéns!! Voce construiu com sucesso seu primeiro pipeline de DevOps dentro de Oracle Cloud!! O passo a seguir é direcionado para validação do projeto
+
+ ## <a name="Passo6"></a> Passo 6: Execução e testes
+
+
 
 
