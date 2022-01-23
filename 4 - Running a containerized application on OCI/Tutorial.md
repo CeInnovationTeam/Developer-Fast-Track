@@ -6,7 +6,7 @@ Nesta etapa construirá uma esteira de desenvolvimento capaz de entregar uma apl
 **Você aprenderá todo o passo-a-passo dessa implementação:**
  - [Pre Reqs: Executar terraform de preparação de ambiente, e coletar informações relevantes ao processo](#PreReqs)
  - [Passo 1: Clonar o repositório e movimentar conteúdo para repositório do projeto DevOps](#Passo1)
- - [Passo 2: Criar e configurar processo de construção (CI)](#Passo2)
+ - [Passo 2: Criar e configurar processo de Build (CI)](#Passo2)
  - [Passo 3: Criar e configurar entrega de artefatos (CI)](#Passo3)
  - [Passo 4: Criar e configurar entrega de aplicação a cluster kubernetes (CD)](#Passo4)
  - [Passo 5: Configurar gatilho do fluxo e conectar pipelines de CI/CD](#Passo5)
@@ -138,4 +138,69 @@ Com isso cumprimos todos os pré requisitos para o laboratório:
  git push origin main
  ```
 
-*Ao final do ultimo comando o **Usuário git** e a senha (**Auth Token**) poderão ser solicitados novamente
+*Ao final do último comando o **Usuário git** e a senha (**Auth Token**) poderão ser solicitados novamente*
+
+ ## <a name="Passo2"></a> Passo 2: Criar e configurar processo de Build (CI)
+
+ 1. Retorne a pagina inicial do projeto DevOps
+ 2. Clique em **Criar pipeline de Build** 
+
+ ![](./IMG/020-LAB4.png)
+
+ 3. Preencha o formulário da seguinte forma, e clique em Criar:
+   - Nome: build
+   - Descrição: (Defina uma descrição qualquer)
+
+ ![](./IMG/021-LAB4.png)
+
+ 4. Abra o pipeline de build recém criado.
+ 5. Na aba parametros, defina os seguintes parametros:
+  - APM_ENDPOINT: Informação coletada nos pré requisitos
+  - APM_PVDATAKEY: Informação coletada nos pré requisitos
+  - APM_AGENT_URL: Informação coletada nos pré requisitos.
+  *Clique no sinal de "+" para que a informação fique salva*
+  
+ ![](./IMG/022-LAB4.png)
+
+ 6. Acesse a aba de **Build Pipeline**, e clique em **Add Stage**  
+
+ ![](./IMG/023-LAB4.png)
+
+ 7. Selecione a opção **Managed Build** e clique **Próximo**
+
+ ![](./IMG/024-LAB4.png)
+
+ 8. Preencha o formulário da seguinte forma:
+
+  - Stage Name: Criacao de artefatos
+  - Descrição: (Defina uma descrição qualquer)
+  - OCI build agent compute shape: (Não alterar)
+  - Base container image: (Não alterar)
+  - Build spec file path: (Não alterar)
+      
+    ![](./IMG/025-LAB4.png)
+
+
+  - Primary code repository: 
+    - Clique no botão **Selecionar** a direita
+    - Source Connection type: OCI Code Repository
+    - Selecione o repositório **ftRepo**
+    - Select Branch: (Não alterar)
+    - Build source name: **java_root**
+    - Clique em **Save**
+    
+    ![](./IMG/026-LAB4.png)
+
+
+  - Clique em **Criar**
+
+ 9. Neste momento é importante entender a forma como a ferramenta trabalha: 
+    
+- A ferramenta utiliza um documento no formato YAML para definir os passos que devem ser executados durante o processo de construção da aplicação.
+- Por padrão este documento é chamado de build_spec.yaml e deve ser configurado previamente de acordo com as necessidades da aplicação
+- Os passos serão então executados por uma instância temporária, que será provisionada no inicio de cada execução e destruida ao final do processo.
+- Documentação de como formatar o documento de build: https://docs.oracle.com/pt-br/iaas/Content/devops/using/build_specs.htm
+- Documento utilizado neste workshop: https://raw.githubusercontent.com/CeInnovationTeam/BackendFTDev/main/build_spec.yaml
+
+ ## <a name="Passo3"></a> Passo 3: Criar e configurar entrega de artefatos (CI)
+
