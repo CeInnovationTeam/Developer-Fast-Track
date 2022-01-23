@@ -430,7 +430,7 @@ Isso conclui o passo de Build do projeto, onde automatizamos a compilação do c
   ```
 
   7. Copie a informação de EXTERNAL-IP assim que disponivel
-  8. Execute substituindo a informação de EXTERNAL-IP pelo IP copiado
+  8. Execute o comando abaixo substituindo a informação de EXTERNAL-IP pelo IP copiado
    ```shell
   curl --location --request POST '<EXTERNAL-IP>/processcart' \
 --header 'Content-Type: application/json' \
