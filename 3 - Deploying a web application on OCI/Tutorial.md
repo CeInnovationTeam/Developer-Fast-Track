@@ -85,8 +85,9 @@ Após finalizar este passo finalizamos o segundo tópico.
 3. No Cloud Shell,  adicione os comandos:
 - `docker build -t app:latest .`
 Para dar build na imagem da sua aplicação
-- `docker tag app:latest iad.ocir.io/<tenancy-namespace>/app:latest`
-Altere o <tenancy-namespace> para o nome que você copiou em seu bloco de notas.
+- `docker tag app:latest <código de região>.ocir.io/<tenancy-namespace>/app:latest`
+- Altere o <código-de-região> para o código de referencia de sua região **composto por 3 letras**, utilize a [tabela de referencia](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm)
+- Altere o <tenancy-namespace> para o nome que você copiou em seu bloco de notas.
 
 
 ## <a name="Passo4"></a> Passo 4: Envio da Imagem para o OCIR
@@ -95,9 +96,9 @@ Neste momento, é necessário enviar a imagem construída para o repositório no
 ### 1. Docker Push
 1. O `docker push` será responsável por tomar a imagem e enviá-la para o OCIR. Para isso, no **Cloud Shell** execute o seguinte comando, substituindo o `<tenancy-namespace>`e o `<image-tag>`:
 ```python
-docker push iad.ocir.io/<tenancy-namespace>/app:latest
+docker push <código de região>.ocir.io/<tenancy-namespace>/app:latest
 ```
-2. O  `<tenancy-namespace>` foi coletado no [Passo 3](#Passo3).
+2. As informações de  `<tenancy-namespace>` e `<código de região>` foram coletados no [Passo 3](#Passo3).
 ![](./images/img12.png)
 3. Você deverá visualizar um resultado como o abaixo:
 ![](./images/img13.png)
