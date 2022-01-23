@@ -80,4 +80,62 @@ Com isso cumprimos todos os pré requisitos para o laboratório:
  ![](./IMG/012-LAB4.png)
  
 
+ ## <a name="Passo1"></a> Passo 1: Clonar o repositório e movimentar conteúdo para repositório do projeto DevOps
 
+ 1. Acesse o recurso de cloud shell
+ 
+ ![](./IMG/013-LAB4.png)
+
+
+ 2. Clone o repositório do projeto 
+
+ ```shell
+ git clone https://github.com/CeInnovationTeam/BackendFTDev.git
+ ```
+
+ 3. Acesse: Menu > Serviços de Desenvolvedor > Devops > Projetos
+  
+ ![](./IMG/014-LAB4.png)
+
+ 4. Acesse o projeto listado
+  
+ ![](./IMG/015-LAB4.png)
+
+ 5. Na página do projeto, clique em **Criar repositório**  
+
+ ![](./IMG/016-LAB4.png)
+
+ 6. Preencha o formulário da seguinte forma:
+
+   - Nome: ftRepo
+   - Description: (Defina uma descrição qualquer)
+   - Branch Default: main
+
+ ![](./IMG/017-LAB4.png)
+
+ 7. Na pagina do repositório recém criado, clique em HTTP e:
+
+    - Copie para o bloco de notas a informação do usuário a ser usado para trabalhar com o git (Referênciaremos esta informação como **Usuário Git**)
+    - Execute o comando de git clone no CloudShell
+
+ ![](./IMG/018-LAB4.png)
+
+ 8. No CloudShell, ao executar o comando, informe o **Usuario Git** recém copiado, e o seu **Auth Token** como senha
+
+ 9. Neste momento o CloudShell deve possuir dois novos diretórios:
+ - BackendFTDev
+ - ftRepo
+ 
+ ![](./IMG/019-LAB4.png)
+
+ 10. Execute os seguintes comandos para copiar o conteúdo do repositório BackendFTDev, para o repositório ftRepo
+
+ ```shell
+ cp -r BackendFTDev/* ftRepo/
+ cd ftRepo
+ git add -A
+ git commit -m "inicio do projeto"
+ git push origin main
+ ```
+
+*Ao final do ultimo comando o **Usuário git** e a senha (**Auth Token**) poderão ser solicitados novamente
