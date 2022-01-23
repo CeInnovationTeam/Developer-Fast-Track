@@ -36,3 +36,48 @@ Nesta etapa construirá uma esteira de desenvolvimento capaz de entregar uma apl
 
 
  - Durante todo este laboratório, utilizaremos este código quando for solicitada a informação de **Auth Token**
+
+
+ 7. No menu, no canto esquerdo superior acesse: Observabilidade & Gerenciamento > Application Performance > Administração
+
+ 
+ ![](./IMG/005-LAB4.png)
+
+
+ 8.  No canto esquerdo inferior, em Escopo, valide se o compartimento correto está selecionado:
+
+  
+ ![](./IMG/006-LAB4.png)
+
+
+ 9. Selecione o Dominio listado: 
+   
+ ![](./IMG/007-LAB4.png)
+
+ 10. Copie as informações necessárias para o bloco de notas:
+
+    - APM_ENDPOINT: Item 1 da imagem
+    - APM_PVDATAKEY: Item 2 da imagem
+
+![](./IMG/008-LAB4.png)
+
+ 11. Retorne a página de dominios
+
+ ![](./IMG/009-LAB4.png)
+ 
+ 12. No canto esquerdo inferior, em Recursos clique em **Download APM Agent**
+
+ ![](./IMG/010-LAB4.png)
+ 
+ 13. **Com o botão direito do mouse** clique no item listado, e selecione **Copiar Link**
+
+ ![](./IMG/011-LAB4.png)
+
+ - APM_AGENT_URL: Cole o link copiado no bloco de notas 
+
+Com isso cumprimos todos os pré requisitos para o laboratório:
+
+ ![](./IMG/012-LAB4.png)
+ 
+
+
