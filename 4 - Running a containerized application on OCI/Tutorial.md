@@ -309,6 +309,21 @@ Isso conclui o passo de Build do projeto, onde automatizamos a compilação do c
  - Clique em **Add**
  18. No canto esquerdo, selecione **Developer Pipelines** em seguida clique em **Create Pipeline**
  19. Preencha o formulario da seguinte forma:
+ - Pipeline name: deploy
+ - Descrição: (Defina uma descrição qualquer)
+ - Clique em **Create**
+ 20. Na Aba de **Parameters** configure o seguinte parametro:
+ - REGISTRY_REGION:  <código-de-região>.ocir.io  
+ *para o código de referencia de sua região **composto por 3 letras**, utilize a [tabela de referencia](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm)*
+ 21. Retorne a aba de **Pipeline** e clique em **Add Stage**
+ 22. Selecione a Opção **Apply Manifest to your Kubernetes Cluster** e clique em **Next**
+ 23. Preencha o formulário da seguinte forma:
+ - Nome: **Deployment da Aplicacao**
+ - Descrição: (Defina uma Descrição qualquer)
+ - Environment: OKE
+ - Clique em **Select Artifact** e selecione **deployment.yaml**
+ - Clique em **Add**
  
+ Com isso finalizamos a parte de deployment, no passo a seguir vamos conectar ambos os pipelines, e definir um gatilho para que o processo automatizado se inicie
 
 
