@@ -103,7 +103,7 @@ Neste código estamos dizendo que queremos criar um novo recurso do tipo **"oci_
 
   
 
-Fonte deste código: [Documentação Terraform sobre API GATEWAY](https://registry.terraform.io/providers/hashicorp/oci/latest/docs/resources/apigateway_api)
+Fonte deste código: [Documentação Terraform sobre API GATEWAY](https://registry.terraform.io/providers/hashicorp/oci/latest/docs/resources/apigateway_gateway)
 
   
 
