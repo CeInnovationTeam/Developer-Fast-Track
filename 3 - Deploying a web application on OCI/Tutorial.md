@@ -91,19 +91,27 @@ Para dar build na imagem da sua aplicação
 ## <a name="Passo4"></a> Passo 4: Envio da Imagem para o OCIR
 Neste momento, é necessário enviar a imagem construída para o repositório no OCIR.
 
-### 1. Docker Push
-1. O `docker push` será responsável por tomar a imagem e enviá-la para o OCIR. Para isso, no **Cloud Shell**, inicialmente, execute o comando `docker login`, substituindo o `<tenancy-namespace>`, o `<e-mail>` e `<region-key>`:
+1. Para isso, precisamos inicialmente obter um Auth Token, que irá nos permitir realizar os comandos docker. Na console, clique no **botão de Perfil**, no canto superior direito. Em seguida, clique na **primeira opção**.
+![](./images/img21.png)
+2. No canto inferior esquerdo, em **Resources**, clique em **Auth Tokens** e no botão **Generate Token**.
+![](./images/img22.png)
+3. Insira uma descrição e clique em **Generate Token**.
+![](./images/img23.png)
+4. Lembre-se de copiar o Auth Token para um bloco de notas, pois você não terá acesso a ele novamente.
+![](./images/img24.png)
+5. Então, no **Cloud Shell**, inicialmente, execute o comando `docker login`, substituindo o `<tenancy-namespace>`, o `<e-mail>` e `<region-key>`:
 ```python
 docker login -u '<tenancy-namespace>/oracleidentitycloudservice/<e-mail>' <region-key>.ocir.io
 ```
+6. O Password pedido será o seu Auth Token, obtido anteriormente.
 
-2. Em seguida, execute então o comando `docker push`, para enviar a imagem ao repositório no OCIR:
+7. Em seguida, execute então o comando `docker push`, para enviar a imagem ao repositório no OCIR:
 ```python
 docker push <region-key>.ocir.io/<tenancy-namespace>/app:latest
 ```
-3. As informações de  `<tenancy-namespace>` e `<region-key>` foram coletados no [Passo 3](#Passo3).
+8. As informações de  `<tenancy-namespace>` e `<region-key>` foram coletados no [Passo 3](#Passo3).
 ![](./images/img12.png)
-4. Você deverá visualizar um resultado como o abaixo:
+9. Você deverá visualizar um resultado como o abaixo:
 ![](./images/img13.png)
 
 Agora a imagem já está armazenada no seu repositório no OCIR!
