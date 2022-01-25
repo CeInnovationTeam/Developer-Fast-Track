@@ -92,12 +92,12 @@ Para dar build na imagem da sua aplicação
 Neste momento, é necessário enviar a imagem construída para o repositório no OCIR.
 
 ### 1. Docker Push
-1. O `docker push` será responsável por tomar a imagem e enviá-la para o OCIR. Para isso, no **Cloud Shell**, inicialmente, o comando docker login, substituindo o `<tenancy-namespace>`, o `<e-mail>` e `<region-key>`:
+1. O `docker push` será responsável por tomar a imagem e enviá-la para o OCIR. Para isso, no **Cloud Shell**, inicialmente, execute o comando `docker login`, substituindo o `<tenancy-namespace>`, o `<e-mail>` e `<region-key>`:
 ```python
 docker login -u '<tenancy-namespace>/oracleidentitycloudservice/<e-mail>' <region-key>.ocir.io
 ```
 
-2. Em seguida, execute então o comando docker push, para enviar a imagem ao repositório no OCIR:
+2. Em seguida, execute então o comando `docker push`, para enviar a imagem ao repositório no OCIR:
 ```python
 docker push <region-key>.ocir.io/<tenancy-namespace>/app:latest
 ```
