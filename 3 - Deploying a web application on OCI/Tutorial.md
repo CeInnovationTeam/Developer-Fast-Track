@@ -47,16 +47,14 @@ Para utilizar o APM na sua aplicação web você precisará salvar algumas infor
 ![](./images/img9.jpg)
 
 5. Copie o conteúdo do bloco abaixo em outro bloco de notas e altere os campos:
-	-  < APM Browser> adicione um nome para sua aplicação, como "App web"
-	- < Web App Name> adicione um nome para sua aplicação, como "App web"
 	- < ociDataUploadEndpoint > adicione o **Data Upload Endpoint** copiado nos passos anteriores
 	- < APM_Public_Datakey > adicione o **auto_generated_public_datakey** copiado nos passos anteriores
 	- src="< **ociDataUploadEndpoint** >/static/jslib/apmrum.min.js"> adicione o **Data Upload Endpoint** copiado nos passos anteriores
 ```javascript
 <script>
 window.apmrum = (window.apmrum || {});
-window.apmrum.serviceName='<APM Browser>';
-window.apmrum.webApplication='<Web App Name>';
+window.apmrum.serviceName='APM-Service';
+window.apmrum.webApplication='App';
 window.apmrum.ociDataUploadEndpoint='<ociDataUploadEndpoint>';
 window.apmrum.OracleAPMPublicDataKey='<APM_Public_Datakey>';
 </script>
@@ -85,8 +83,8 @@ Após finalizar este passo finalizamos o segundo tópico.
 3. No Cloud Shell,  adicione os comandos:
 - `docker build -t app:latest .`
 Para dar build na imagem da sua aplicação
-- `docker tag app:latest <código de região>.ocir.io/<tenancy-namespace>/app:latest`
-- Altere o <código-de-região> para o código de referencia de sua região **composto por 3 letras**, utilize a [tabela de referencia](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm)
+- `docker tag app:latest <region-key>.ocir.io/<tenancy-namespace>/app:latest`
+- Altere a `<region-key>` para o código de referencia de sua região **composto por 3 letras**, utilize a [tabela de referencia](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm)
 - Altere o <tenancy-namespace> para o nome que você copiou em seu bloco de notas.
 
 
@@ -94,13 +92,18 @@ Para dar build na imagem da sua aplicação
 Neste momento, é necessário enviar a imagem construída para o repositório no OCIR.
 
 ### 1. Docker Push
-1. O `docker push` será responsável por tomar a imagem e enviá-la para o OCIR. Para isso, no **Cloud Shell** execute o seguinte comando, substituindo o `<tenancy-namespace>`e o `<image-tag>`:
+1. O `docker push` será responsável por tomar a imagem e enviá-la para o OCIR. Para isso, no **Cloud Shell**, inicialmente, o comando docker login, substituindo o `<tenancy-namespace>`, o `<e-mail>` e `<region-key>`:
 ```python
-docker push <código de região>.ocir.io/<tenancy-namespace>/app:latest
+docker login -u '<tenancy-namespace>/oracleidentitycloudservice/<e-mail>' <region-key>.ocir.io
 ```
-2. As informações de  `<tenancy-namespace>` e `<código de região>` foram coletados no [Passo 3](#Passo3).
+
+2. Em seguida, execute então o comando docker push, para enviar a imagem ao repositório no OCIR:
+```python
+docker push <region-key>.ocir.io/<tenancy-namespace>/app:latest
+```
+3. As informações de  `<tenancy-namespace>` e `<region-key>` foram coletados no [Passo 3](#Passo3).
 ![](./images/img12.png)
-3. Você deverá visualizar um resultado como o abaixo:
+4. Você deverá visualizar um resultado como o abaixo:
 ![](./images/img13.png)
 
 Agora a imagem já está armazenada no seu repositório no OCIR!
