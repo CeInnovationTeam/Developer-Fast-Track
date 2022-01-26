@@ -265,8 +265,9 @@ Com isso cumprimos todos os pré requisitos para o laboratório:
 ![](./IMG/060-LAB4.png)
 
 11. Em _Repository name_, insira o nome "java-img" e clique em **Create Repository**.
-![](./IMG/062-LAB4.png)
 ![](./IMG/061-LAB4.png)
+![](./IMG/062-LAB4.png)
+
 
 12. Volte à aba referente ao OCI DevOps e, no canto superior direito, clique em **Start Manual Run**
        
