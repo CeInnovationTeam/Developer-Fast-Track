@@ -154,7 +154,7 @@ Neste momento, precisamos criar um secret que será utilizado para permitir que 
 ### 1. Criando o secret 
 1. Copie o comando abaixo:
 ```python
-kubectl create secret docker-registry ocirsecret --docker-server=<region-key>.ocir.io --docker-username='<tenancy-namespace>/<oci-username>' --docker-password='<oci-auth-token>' --docker-email='<email-address>'
+kubectl create secret docker-registry ocir --docker-server=<region-key>.ocir.io --docker-username='<tenancy-namespace>/<oci-username>' --docker-password='<oci-auth-token>' --docker-email='<email-address>'
 ```
 2. O valor "ocirsecret" é o nome que estamos atribuindo ao secret.
 3. A  `<region-key>` é _iad_.
@@ -167,8 +167,8 @@ kubectl create secret docker-registry ocirsecret --docker-server=<region-key>.oc
 ```python
 kubectl get secrets
 ```
-9. Você deve visualizar os detalhes relativos ao segredo `ocirsecret` criado.
-![](./images/img18.png)
+9. Você deve visualizar os detalhes relativos ao segredo `ocir` criado.
+![](./images/img25.png)
 
 ## <a name="Passo7"></a>Passo 7: Aplicação do Manifesto Kubernetes
 O manifesto kubernetes é, basicamente, a especificação de um objeto Kubernetes API no formato JSON ou YAML. O manifesto, então, especifica o estado desejado de um objeto que o Kubernetes irá manter quando você aplicar esse manifesto. De forma simplificada, nós iremos usar o manifesto para implementar a nossa aplicação web no cluster OKE. 
@@ -181,7 +181,7 @@ cd $HOME
 ```
 2. Ainda no **Cloud Shell**, no mesmo diretório, crie um novo arquivo de texto com o nome _app.yml_:
 ```python
-vim app.yaml
+vim app.yml
 ```
 3. Dentro do editor vim, aperte a tecla _i_ do teclado, para acessar o modo de edição.
 4. Agora, em um editor de sua preferência, copie e cole o texto abaixo.
@@ -206,7 +206,7 @@ spec:
           ports:
             - containerPort: 80
       imagePullSecrets:
-        - name: ocirsecret
+        - name: ocir
 
 ---
 
@@ -223,11 +223,11 @@ spec:
       port: 80
 ```
 - Obs: Veja que especificamos um serviço do tipo Load Balancer na linha `type: LoadBalancer`! Ele utilizará o protocolo TCP e a porta 80 para rotear o tráfego de entrada para os nós do cluster, permitindo a comunicação com nossa aplicação web!
-6. Lembre-se de substituir o `<tenancy-namespace>` e a `<image-tag>`.
+6. Lembre-se de substituir o `<tenancy-namespace>` e a `<image-tag>`, que no nosso caso é _app:latest_.
 7. Após a edição, cole o texto no editor vim, no **Cloud Shell**, e execute a seguinte sequência:
 	1. Aperte a tecla _ESC_.
 	2. Digite os três caracteres: _wq!_ e pressione a tecla _ENTER_ para sair da edição, salvando o arquivo.
-![](./images/img19.png)
+![](./images/img26.png)
 
 ### 2. Aplicação do Manifesto Kubernetes
 1. No **Cloud Shell**, para aplicar o manifesto, execute o seguinte comando:
