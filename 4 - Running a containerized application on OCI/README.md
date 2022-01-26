@@ -260,7 +260,16 @@ Com isso cumprimos todos os pré requisitos para o laboratório:
     ![](./IMG/033-LAB4.png)
 
 8. Clique em **Adicionar**
-9. No canto superior direito, clique em **Start Manual Run**
+9. Duplique a aba do seu navegador e acesse o OCIR.
+10. No novo compartment criado, clique em **Create Repository**.
+![](./IMG/060-LAB4.png)
+
+11. Em _Repository name_, insira o nome "java-img" e clique em **Create Repository**.
+![](./IMG/061-LAB4.png)
+![](./IMG/062-LAB4.png)
+
+
+12. Volte à aba referente ao OCI DevOps e, no canto superior direito, clique em **Start Manual Run**
        
     ![](./IMG/034-LAB4.png)
 
@@ -429,12 +438,20 @@ Isso conclui o passo de Build do projeto, onde automatizamos a compilação do c
   kubectl get svc
   ```
 
-  7. Copie a informação de EXTERNAL-IP assim que disponivel
-  8. Execute o comando abaixo substituindo a informação de EXTERNAL-IP pelo IP copiado
+  7. Copie a informação de EXTERNAL-IP do serviço _svc-java-app_ assim que estiver disponível.
+
+```shell
+NAME           TYPE           CLUSTER-IP      EXTERNAL-IP       PORT(S)          AGE
+kubernetes     ClusterIP      10.96.0.1       <none>            443/TCP          30h
+svc-app        LoadBalancer   10.96.252.115   <svc-app-ip>   80:31159/TCP     29h
+svc-java-app   LoadBalancer   10.96.16.229    <EXTERNAL-IP>   8081:32344/TCP   103m
+```
+
+  8. Execute o comando abaixo substituindo a informação de <EXTERNAL-IP> pelo IP copiado
    ```shell
-  curl --location --request POST '<EXTERNAL-IP>/processcart' \
+  curl --location --request POST '<EXTERNAL-IP>:8081/processcart' \
 --header 'Content-Type: application/json' \
---data-raw '[
+--data '[
       {   "nome":"Oranges",
       "preco":1.99
       },
@@ -448,7 +465,10 @@ Isso conclui o passo de Build do projeto, onde automatizamos a compilação do c
           "preco":3.99
       }
 ]'
-  ```
+```
+- Você deverá visualizar a seguinte resposta:
 
-Parabéns! Pela conclusão deste laboratório!
+![](./IMG/059-LAB4.png)
+
+Parabéns pela conclusão deste laboratório sobre OCI DevOps!
 

@@ -47,16 +47,14 @@ Para utilizar o APM na sua aplicação web você precisará salvar algumas infor
 ![](./images/img9.jpg)
 
 5. Copie o conteúdo do bloco abaixo em outro bloco de notas e altere os campos:
-	-  < APM Browser> adicione um nome para sua aplicação, como "App web"
-	- < Web App Name> adicione um nome para sua aplicação, como "App web"
 	- < ociDataUploadEndpoint > adicione o **Data Upload Endpoint** copiado nos passos anteriores
 	- < APM_Public_Datakey > adicione o **auto_generated_public_datakey** copiado nos passos anteriores
 	- src="< **ociDataUploadEndpoint** >/static/jslib/apmrum.min.js"> adicione o **Data Upload Endpoint** copiado nos passos anteriores
 ```javascript
 <script>
 window.apmrum = (window.apmrum || {});
-window.apmrum.serviceName='<APM Browser>';
-window.apmrum.webApplication='<Web App Name>';
+window.apmrum.serviceName='APM-Service';
+window.apmrum.webApplication='App';
 window.apmrum.ociDataUploadEndpoint='<ociDataUploadEndpoint>';
 window.apmrum.OracleAPMPublicDataKey='<APM_Public_Datakey>';
 </script>
@@ -85,22 +83,35 @@ Após finalizar este passo finalizamos o segundo tópico.
 3. No Cloud Shell,  adicione os comandos:
 - `docker build -t app:latest .`
 Para dar build na imagem da sua aplicação
-- `docker tag app:latest <código de região>.ocir.io/<tenancy-namespace>/app:latest`
-- Altere o <código-de-região> para o código de referencia de sua região **composto por 3 letras**, utilize a [tabela de referencia](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm)
+- `docker tag app:latest <region-key>.ocir.io/<tenancy-namespace>/app:latest`
+- Altere a `<region-key>` para o código de referencia de sua região **composto por 3 letras**, utilize a [tabela de referencia](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm)
 - Altere o <tenancy-namespace> para o nome que você copiou em seu bloco de notas.
 
 
 ## <a name="Passo4"></a> Passo 4: Envio da Imagem para o OCIR
 Neste momento, é necessário enviar a imagem construída para o repositório no OCIR.
 
-### 1. Docker Push
-1. O `docker push` será responsável por tomar a imagem e enviá-la para o OCIR. Para isso, no **Cloud Shell** execute o seguinte comando, substituindo o `<tenancy-namespace>`e o `<image-tag>`:
+1. Para isso, precisamos inicialmente obter um Auth Token, que irá nos permitir realizar os comandos docker. Na console, clique no **botão de Perfil**, no canto superior direito. Em seguida, clique na **primeira opção**.
+![](./images/img21.png)
+2. No canto inferior esquerdo, em **Resources**, clique em **Auth Tokens** e no botão **Generate Token**.
+![](./images/img22.png)
+3. Insira uma descrição e clique em **Generate Token**.
+![](./images/img23.png)
+4. Lembre-se de copiar o Auth Token para um bloco de notas, pois você não terá acesso a ele novamente.
+![](./images/img24.png)
+5. Então, no **Cloud Shell**, inicialmente, execute o comando `docker login`, substituindo o `<tenancy-namespace>`, o `<e-mail>` e `<region-key>`:
 ```python
-docker push <código de região>.ocir.io/<tenancy-namespace>/app:latest
+docker login -u '<tenancy-namespace>/oracleidentitycloudservice/<e-mail>' <region-key>.ocir.io
 ```
-2. As informações de  `<tenancy-namespace>` e `<código de região>` foram coletados no [Passo 3](#Passo3).
+6. O Password pedido será o seu Auth Token, obtido anteriormente.
+
+7. Em seguida, execute então o comando `docker push`, para enviar a imagem ao repositório no OCIR:
+```python
+docker push <region-key>.ocir.io/<tenancy-namespace>/app:latest
+```
+8. As informações de  `<tenancy-namespace>` e `<region-key>` foram coletados no [Passo 3](#Passo3).
 ![](./images/img12.png)
-3. Você deverá visualizar um resultado como o abaixo:
+9. Você deverá visualizar um resultado como o abaixo:
 ![](./images/img13.png)
 
 Agora a imagem já está armazenada no seu repositório no OCIR!
@@ -143,7 +154,7 @@ Neste momento, precisamos criar um secret que será utilizado para permitir que 
 ### 1. Criando o secret 
 1. Copie o comando abaixo:
 ```python
-kubectl create secret docker-registry ocirsecret --docker-server=<region-key>.ocir.io --docker-username='<tenancy-namespace>/<oci-username>' --docker-password='<oci-auth-token>' --docker-email='<email-address>'
+kubectl create secret docker-registry ocir --docker-server=<region-key>.ocir.io --docker-username='<tenancy-namespace>/<oci-username>' --docker-password='<oci-auth-token>' --docker-email='<email-address>'
 ```
 2. O valor "ocirsecret" é o nome que estamos atribuindo ao secret.
 3. A  `<region-key>` é _iad_.
@@ -156,8 +167,8 @@ kubectl create secret docker-registry ocirsecret --docker-server=<region-key>.oc
 ```python
 kubectl get secrets
 ```
-9. Você deve visualizar os detalhes relativos ao segredo `ocirsecret` criado.
-![](./images/img18.png)
+9. Você deve visualizar os detalhes relativos ao segredo `ocir` criado.
+![](./images/img25.png)
 
 ## <a name="Passo7"></a>Passo 7: Aplicação do Manifesto Kubernetes
 O manifesto kubernetes é, basicamente, a especificação de um objeto Kubernetes API no formato JSON ou YAML. O manifesto, então, especifica o estado desejado de um objeto que o Kubernetes irá manter quando você aplicar esse manifesto. De forma simplificada, nós iremos usar o manifesto para implementar a nossa aplicação web no cluster OKE. 
@@ -170,7 +181,7 @@ cd $HOME
 ```
 2. Ainda no **Cloud Shell**, no mesmo diretório, crie um novo arquivo de texto com o nome _app.yml_:
 ```python
-vim app.yaml
+vim app.yml
 ```
 3. Dentro do editor vim, aperte a tecla _i_ do teclado, para acessar o modo de edição.
 4. Agora, em um editor de sua preferência, copie e cole o texto abaixo.
@@ -195,7 +206,7 @@ spec:
           ports:
             - containerPort: 80
       imagePullSecrets:
-        - name: ocirsecret
+        - name: ocir
 
 ---
 
@@ -212,11 +223,11 @@ spec:
       port: 80
 ```
 - Obs: Veja que especificamos um serviço do tipo Load Balancer na linha `type: LoadBalancer`! Ele utilizará o protocolo TCP e a porta 80 para rotear o tráfego de entrada para os nós do cluster, permitindo a comunicação com nossa aplicação web!
-6. Lembre-se de substituir o `<tenancy-namespace>` e a `<image-tag>`.
+6. Lembre-se de substituir o `<tenancy-namespace>` e a `<image-tag>`, que no nosso caso é _app:latest_.
 7. Após a edição, cole o texto no editor vim, no **Cloud Shell**, e execute a seguinte sequência:
 	1. Aperte a tecla _ESC_.
 	2. Digite os três caracteres: _wq!_ e pressione a tecla _ENTER_ para sair da edição, salvando o arquivo.
-![](./images/img19.png)
+![](./images/img26.png)
 
 ### 2. Aplicação do Manifesto Kubernetes
 1. No **Cloud Shell**, para aplicar o manifesto, execute o seguinte comando:
