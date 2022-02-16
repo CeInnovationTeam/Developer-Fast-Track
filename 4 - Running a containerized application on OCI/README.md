@@ -132,6 +132,8 @@ Com isso cumprimos todos os pré requisitos para o laboratório:
  10. Execute os seguintes comandos para copiar o conteúdo do repositório BackendFTDev, para o repositório ftRepo
 
  ```shell
+ git config --global user.email "<seu-email>"
+ git config --global user.name "<seu-username>"
  cp -r BackendFTDev/* ftRepo/
  cd ftRepo
  git add -A
