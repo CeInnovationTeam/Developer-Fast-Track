@@ -16,7 +16,7 @@ In this step, you will build a development pipeline capable of delivering a cont
 ## <a name="PreReqs"></a> Pre Reqs: Perform Terraform environment preparation and collect process-relevant information
   
 1. Log in to your Cloud account. [link](https://www.oracle.com/cloud/sign-in.html)
-2. Run [Laboratory 2](../2%20-%20Using%20Terraform%20on%20OCI/Tutorial.md) from this workshop - *Run only if you have not run it before*.
+2. Run [Laboratory 2](../2%20-%20Using%20Terraform%20on%20OCI) from this workshop - *Run only if you have not run it before*.
 3. In the upper right corner, click the profile icon, and click your username.
   
 ![](./IMG/001-LAB4.png)
@@ -121,10 +121,12 @@ git clone https://github.com/CeInnovationTeam/BackendFTDev.git
 10. Run the following commands to copy the contents of the BackendFTDev repository to the ftRepo repository
   
 ```shell
+git config --global user.email "<your-email>"
+git config --global user.name "<your-username>"
 cp -r BackendFTDev/* ftRepo/
 cd ftRepo
 git add -A
-git commit -m "inicio do projeto"
+git commit -m "start of the project"
 git push origin main
 ```
   
