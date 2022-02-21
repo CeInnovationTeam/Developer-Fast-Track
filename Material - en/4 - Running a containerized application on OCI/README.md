@@ -49,6 +49,7 @@ In this step, you will build a development pipeline capable of delivering a cont
   
   
 9. Select the Domain listed:
+
 ![](./IMG/007-LAB4.png)
   
 10. Copy the necessary information into a notepad:
