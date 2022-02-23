@@ -202,7 +202,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: iad.ocir.io/<tenancy-namespace>/<image-tag>
+          image: <region-key>.ocir.io/<tenancy-namespace>/<image-tag>
           ports:
             - containerPort: 80
       imagePullSecrets:
@@ -223,7 +223,7 @@ spec:
       port: 80
 ```
 - Obs: Veja que especificamos um serviço do tipo Load Balancer na linha `type: LoadBalancer`! Ele utilizará o protocolo TCP e a porta 80 para rotear o tráfego de entrada para os nós do cluster, permitindo a comunicação com nossa aplicação web!
-6. Lembre-se de substituir o `<tenancy-namespace>` e a `<image-tag>`, que no nosso caso é _app:latest_.
+6. Lembre-se de substituir a `<region-key>`,o `<tenancy-namespace>` e a `<image-tag>`, que no nosso caso é _app:latest_.
 7. Após a edição, cole o texto no editor vim, no **Cloud Shell**, e execute a seguinte sequência:
 	1. Aperte a tecla _ESC_.
 	2. Digite os três caracteres: _wq!_ e pressione a tecla _ENTER_ para sair da edição, salvando o arquivo.
